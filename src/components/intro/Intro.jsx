@@ -6,10 +6,7 @@ export default function Intro() {
   const textRef = useRef();
   
   useEffect(()=>{
-    init(textRef.current, {
-       showCursor: false, 
-       strings: ["eveloper", "Designer", ],
-       });
+    init(textRef.current,{ showCursor: false,  strings: ["Developer", "Designer"] })
   },[]);
 
   return (
