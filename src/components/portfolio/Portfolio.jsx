@@ -1,14 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PortfolioList from "../portfolioList/PortfolioList"
 import "./portfolio.scss"
+import { featuredPortfolio, webPortfolio, designPortfolio  } from "../../data"
 
 export default function Portfolio() {
-  const [selected, setSelected] = useState("featured")
+  const [selected, setSelected] = useState("design")
+  const [data, setData] = useState([])
+  
 
   const list = [
         {
-          id: "featured",
-          title: "Featured"
+          id: "design",
+          title: "Design"
         },
         {
           id: "web",
@@ -19,14 +22,34 @@ export default function Portfolio() {
           title: "Mobile App" 
         },
         {
-          id: "design",
-          title: "Design"
+          id: "featured",
+          title: "Featured"
         },
         {
           id: "content",
           title: "Content"
         }
   ]
+
+  useEffect(()=>{
+    switch(selected){
+      case "featured":
+        setData(featuredPortfolio);
+        break;
+      
+        case "web":
+          setData(webPortfolio);
+          break;
+
+        case "design":
+          setData(designPortfolio);
+          break;
+
+        default:
+          setData(featuredPortfolio)
+    }
+  }, [selected])
+ 
 
   return (
     <div className="portfolio" id="portfolio">
@@ -45,42 +68,15 @@ export default function Portfolio() {
       </div>
 
       <div className="container">
-        <div className="item">
-          <img src="assets/usemytools.jpg" 
+          {data.map((app)=>(  
+          <div className="item">
+          <img src={app.img} 
           alt="" />
-          <h3>Use my Tools</h3>
+          <a href={app.website} target="_blank">{app.title}</a>
+          
         </div>
-
-        <div className="item">
-          <img src="assets/usemytools.jpg" 
-          alt="" />
-          <h3>Use my Tools</h3>
-        </div>
-
-        <div className="item">
-          <img src="assets/usemytools.jpg" 
-          alt="" />
-          <h3>Use my Tools</h3>
-        </div>
-
-        <div className="item">
-          <img src="assets/usemytools.jpg" 
-          alt="" />
-          <h3>Use my Tools</h3> 
-        </div>
-
-        <div className="item">
-          <img src="assets/usemytools.jpg" 
-          alt="" />
-          <h3>Use my Tools</h3>
-        </div>
-
-        <div className="item">
-          <img src="assets/usemytools.jpg" 
-          alt="" />
-          <h3>Use my Tools</h3>
-        </div>
-        
+          ))}
+ 
       </div>
     </div>
   )
