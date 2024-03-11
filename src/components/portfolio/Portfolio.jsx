@@ -8,7 +8,7 @@ export default function Portfolio() {
   const [data, setData] = useState([])
   
 
-  const list = [
+  const list = [ 
         {
           id: "design",
           title: "Design"
@@ -58,6 +58,7 @@ export default function Portfolio() {
         <ul>
          {list.map((item)=>(
           <PortfolioList 
+          key={item.id}
           title={item.title} 
           active={selected === item.id}
           setSelected={setSelected}
@@ -69,10 +70,10 @@ export default function Portfolio() {
 
       <div className="container">
           {data.map((app)=>(  
-          <div className="item">
+          <div className="item" key={app.id}>
           <img src={app.img} 
           alt="" />
-          <a href={app.website} target="_blank">{app.title}</a>
+          <a href={app.website} target="_blank" rel="noreferrer">{app.title}</a>
           
         </div>
           ))}
